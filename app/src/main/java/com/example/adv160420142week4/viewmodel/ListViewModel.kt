@@ -13,12 +13,12 @@ import com.example.adv160420142week4.model.Student
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class ListViewModel(application: Application): AndroidViewModel(application){
+class ListViewModel(application: Application):
+    AndroidViewModel(application){
 
     val studentsLD = MutableLiveData<ArrayList<Student>>()
     val studentLoadErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
-
     val TAG = "volleyTag"
     private var queue: RequestQueue? = null
 

@@ -33,18 +33,18 @@ class StudentListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         viewModel.refresh()
-        val recView = view.findViewById<RecyclerView>(R.id.recView)
-        recView.layoutManager = LinearLayoutManager(context)
-        recView.adapter = studentListAdapter
+        val recView = view?.findViewById<RecyclerView>(R.id.recView)
+        recView?.layoutManager = LinearLayoutManager(context)
+        recView?.adapter = studentListAdapter
         observeViewModel()
 
-        val refreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
-        val txtError = view.findViewById<TextInputEditText>(R.id.txtError)
-        val progressLoad = view.findViewById<ProgressBar>(R.id.progressLoad)
-        refreshLayout.setOnRefreshListener {
-            recView.visibility = View.GONE
-            txtError.visibility = View.GONE
-            progressLoad.visibility = View.VISIBLE
+        val refreshLayout = view?.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        val txtError = view?.findViewById<TextView>(R.id.txtError)
+        val progressLoad = view?.findViewById<ProgressBar>(R.id.progressLoad)
+        refreshLayout?.setOnRefreshListener {
+            recView?.visibility = View.GONE
+            txtError?.visibility = View.GONE
+            progressLoad?.visibility = View.VISIBLE
             viewModel.refresh()
             refreshLayout.isRefreshing = false
         }
