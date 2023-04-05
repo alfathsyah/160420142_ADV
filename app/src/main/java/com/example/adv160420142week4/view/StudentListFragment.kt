@@ -11,8 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.adv160420142week4.R
 import com.example.adv160420142week4.viewmodel.ListViewModel
+import com.google.android.material.textfield.TextInputEditText
 
 class StudentListFragment : Fragment() {
 
@@ -35,6 +37,18 @@ class StudentListFragment : Fragment() {
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = studentListAdapter
         observeViewModel()
+
+        val refreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        val txtError = view.findViewById<TextInputEditText>(R.id.txtError)
+        val progressLoad = view.findViewById<ProgressBar>(R.id.progressLoad)
+        refreshLayout.setOnRefreshListener {
+            recView.visibility = View.GONE
+            txtError.visibility = View.GONE
+            progressLoad.visibility = View.VISIBLE
+            viewModel.refresh()
+            refreshLayout.isRefreshing = false
+        }
+
     }
 
     fun observeViewModel() {
